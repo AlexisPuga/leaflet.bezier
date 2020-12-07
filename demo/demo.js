@@ -1,4 +1,4 @@
-$(function () {
+(function () {
 
     var map = L.map('map').setView([6.9270786, 79.861243], 3);
 
@@ -45,4 +45,4 @@ $(function () {
     }, dash_straight).addTo(map);
 
 
-});
+})();
