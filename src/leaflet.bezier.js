@@ -68,70 +68,6 @@ const Bezier = L.Path.extend({
 
     this._renderer._removePath(this);
   },
-  setAnimatePlane(path: any) {
-    const self = this;
-
-    if (this.spaceship_img) { this.spaceship_img.remove(); }
-
-    const SnapSvg = Snap('.leaflet-overlay-pane>svg');
-
-    const spaceship_img = this.spaceship_img = SnapSvg.image(this.icon.path).attr({
-      visibility: 'hidden',
-    });
-
-    const spaceship = SnapSvg.group(spaceship_img);
-    const flightPath = SnapSvg.path(path).attr({
-      fill: 'none',
-      stroke: 'none',
-    });
-
-    const fullPathLength = Snap.path.getTotalLength(flightPath);
-    let destinationPathLength = fullPathLength / 2; // default half
-
-    if (this.options.iconTravelLength && !isNaN(parseFloat(this.options.iconTravelLength))) {
-      destinationPathLength = fullPathLength * parseFloat(this.options.iconTravelLength);
-    }
-
-    const halfPathLength = (destinationPathLength) - (destinationPathLength / (this.options.easeOutPiece ? this.options.easeOutPiece : 50));
-
-    let width = halfPathLength / this._map.getZoom();
-    let height = halfPathLength / this._map.getZoom();
-
-    width = Math.min(Math.max(width, 30), this.options.iconMaxWidth ? this.options.iconMaxWidth : 50);
-    height = Math.min(Math.max(height, 30), this.options.iconMaxHeight ? this.options.iconMaxHeight : 50);
-
-    const fullAnimatedTime = this.options.fullAnimatedTime ? this.options.fullAnimatedTime : 7000;
-    const easeOutTime = this.options.easeOutTime ? this.options.easeOutTime : 2500;
-
-    let lastStep = 0;
-    Snap.animate(0, halfPathLength, (step) => {
-      // show image when plane start to animate
-      spaceship_img.attr({
-        visibility: 'visible',
-      });
-
-      spaceship_img.attr({ width, height, class: self.icon.class });
-      lastStep = step;
-
-      const moveToPoint = Snap.path.getPointAtLength(flightPath, step);
-
-      const x = moveToPoint.x - (width / 2);
-      const y = moveToPoint.y - (height / 2);
-
-      spaceship.transform(`translate(${x},${y}) rotate(${moveToPoint.alpha - 90}, ${width / 2}, ${height / 2})`);
-    }, easeOutTime, mina.easeout, () => {
-      Snap.animate(halfPathLength, destinationPathLength, (step) => {
-        lastStep = step;
-        const moveToPoint = Snap.path.getPointAtLength(flightPath, step);
-
-        const x = moveToPoint.x - width / 2;
-        const y = moveToPoint.y - height / 2;
-        spaceship.transform(`translate(${x},${y}) rotate(${moveToPoint.alpha - 90}, ${width / 2}, ${height / 2})`);
-      }, fullAnimatedTime, mina.easein, () => {
-        // done
-      });
-    });
-  },
   getPath(): any {
     return this._coords;
   },
@@ -191,9 +127,8 @@ const Bezier = L.Path.extend({
     this._updatePath();
   },
   _updatePath() {
-    // animated plane
     const path = this._renderer._updateCurve(this);
-    this.setAnimatePlane(path);
+
   },
   _project() {
     this._points = [];
