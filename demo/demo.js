@@ -13,10 +13,7 @@
         fillColor: 'rgb(145, 146, 150)',
         dashArray: 8,
         opacity: 0.8,
-        weight: '1',
-        fullAnimatedTime: 7000,
-        easeOutPiece: 4,
-        easeOutTime: 2500,
+        weight: '1'
     };
 
     L.bezier({

@@ -3,23 +3,6 @@ L.SVG.include({
     const svg_path = this._curvePointsToPath(layer._points);
     this._setPath(layer, svg_path);
 
-    if (layer.options.animate) {
-      const path = layer._path;
-      const length = path.getTotalLength();
-
-      if (!layer.options.dashArray) {
-        path.style.strokeDasharray = `${length} ${length}`;
-      }
-
-      if (layer._initialUpdate) {
-        path.animate([
-          { strokeDashoffset: length },
-          { strokeDashoffset: 0 },
-        ], layer.options.animate);
-        layer._initialUpdate = false;
-      }
-    }
-
     return svg_path;
   },
   _curvePointsToPath(points: any): any {
