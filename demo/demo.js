@@ -14,9 +14,6 @@ $(function () {
         dashArray: 8,
         opacity: 0.8,
         weight: '1',
-        iconTravelLength: 1,
-        iconMaxWidth: 50,
-        iconMaxHeight: 50,
         fullAnimatedTime: 7000,
         easeOutPiece: 4,
         easeOutTime: 2500,
@@ -44,10 +41,7 @@ $(function () {
                 {lat: 7.8731, lng: 80.7718, slide: 'RIGHT_ROUND'},
                 {lat: -18.7669, lng: 46.8691},
             ]
-        ],
-        icon: {
-            path: "plane.png"
-        }
+        ]
     }, dash_straight).addTo(map);
 
 

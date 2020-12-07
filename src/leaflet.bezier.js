@@ -38,7 +38,7 @@ L.SVG.include({
 
 const Bezier = L.Path.extend({
   options: {},
-  initialize(path: any, icon: any, options: {}) {
+  initialize(path: any, options: {}) {
     if (!path.mid || path.mid[0] === undefined) {
       path.mid = this.getMidPoint(
         path.from,
@@ -51,7 +51,6 @@ const Bezier = L.Path.extend({
     L.setOptions(this, options);
     this._initialUpdate = true;
     this.setPath(path);
-    this.icon = icon;
   },
   onAdd(map: any) {
     this._renderer._initPath(this);
@@ -149,7 +148,7 @@ L.bezier = (config: {}, options: {}) => {
       const currentDestination = config.path[i][c];
       if (lastDestination) {
         const path_pair = { from: lastDestination, to: currentDestination };
-        paths.push(new Bezier(path_pair, config.icon, options));
+        paths.push(new Bezier(path_pair, options));
       }
       lastDestination = config.path[i][c];
     }
