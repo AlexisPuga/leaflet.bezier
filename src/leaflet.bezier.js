@@ -57,15 +57,8 @@ const Bezier = L.Path.extend({
     this._renderer._initPath(this);
     this._reset();
     this._renderer._addPath(this);
-
-    // TODO adjust plane according to zoom
-    map.on('zoom', () => {
-
-    });
   },
   onRemove() {
-    if (this.spaceship_img) { this.spaceship_img.remove(); }
-
     this._renderer._removePath(this);
   },
   getPath(): any {
