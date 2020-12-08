@@ -3,11 +3,15 @@
   "version": "0.1.1",
   "description": "Leaflet curve line",
   "main": "dist/leaflet.bezier.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build && npm run open",
     "build": "export $(cat .env | xargs) && sh build.sh",
-    "open": "node  node_modules/http-server/bin/http-server -o"
+    "open": "node  node_modules/http-server/bin/http-server -o",
+    "prepack": "npm run build"
   },
   "repository": {
     "type": "git",
