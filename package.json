@@ -11,7 +11,7 @@
     "start": "npm run build && npm run open",
     "build": "export $(cat .env | xargs) && sh build.sh",
     "open": "node  node_modules/http-server/bin/http-server -o",
-    "prepack": "npm run build"
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
